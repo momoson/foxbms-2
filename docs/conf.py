@@ -46,6 +46,8 @@ import sphinx_rtd_theme
 
 # pylint: skip-file
 
+tls_verify = False
+
 sys.path = [
     os.path.abspath("."),
     os.path.abspath("./../tools/gui"),

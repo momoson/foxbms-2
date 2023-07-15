@@ -59,7 +59,7 @@ FOXBMS_URL = "https://foxbms.org"
 FOXBMS_DOC_BASE_URL = "https://iisb-foxbms.iisb.fraunhofer.de/"
 # try the correct version
 FOXBMS_DOC_URL = f"{FOXBMS_DOC_BASE_URL}/foxbms/gen2/docs/html/v{__version__}/"
-html = httplib2.Http()
+html = httplib2.Http(disable_ssl_certificate_validation=True)
 try:
     resp = html.request(FOXBMS_DOC_URL, "HEAD")
 except TimeoutError:
