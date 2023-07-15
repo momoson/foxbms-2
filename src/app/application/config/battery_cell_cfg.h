@@ -137,9 +137,9 @@
  * @unit    mV
  */
 /**@{*/
-#define BC_VOLTAGE_MAX_MSL_mV (2800)
-#define BC_VOLTAGE_MAX_RSL_mV (2750)
-#define BC_VOLTAGE_MAX_MOL_mV (2720)
+#define BC_VOLTAGE_MAX_MSL_mV (4300)
+#define BC_VOLTAGE_MAX_RSL_mV (4250)
+#define BC_VOLTAGE_MAX_MOL_mV (4200)
 /**@}*/
 
 /**
@@ -147,7 +147,7 @@
  * @ptype   int
  * @unit    mV
  */
-#define BC_VOLTAGE_NOMINAL_mV (2500)
+#define BC_VOLTAGE_NOMINAL_mV (3650)
 
 /**
  * @brief   Minimum cell voltage limit.
@@ -159,9 +159,9 @@
  * @unit    mV
  */
 /**@{*/
-#define BC_VOLTAGE_MIN_MSL_mV (1700)
-#define BC_VOLTAGE_MIN_RSL_mV (1750)
-#define BC_VOLTAGE_MIN_MOL_mV (1780)
+#define BC_VOLTAGE_MIN_MSL_mV (2750)
+#define BC_VOLTAGE_MIN_RSL_mV (2700)
+#define BC_VOLTAGE_MIN_MOL_mV (2700)
 /**@}*/
 
 /**
@@ -185,9 +185,9 @@
  * @unit    mA
  */
 /**@{*/
-#define BC_CURRENT_MAX_DISCHARGE_MSL_mA (180000u)
-#define BC_CURRENT_MAX_DISCHARGE_RSL_mA (175000u)
-#define BC_CURRENT_MAX_DISCHARGE_MOL_mA (170000u)
+#define BC_CURRENT_MAX_DISCHARGE_MSL_mA (10000u)
+#define BC_CURRENT_MAX_DISCHARGE_RSL_mA (9900u)
+#define BC_CURRENT_MAX_DISCHARGE_MOL_mA (9700u)
 /**@}*/
 
 /**
@@ -200,9 +200,9 @@
  * @unit    mA
  */
 /**@{*/
-#define BC_CURRENT_MAX_CHARGE_MSL_mA (180000u)
-#define BC_CURRENT_MAX_CHARGE_RSL_mA (175000u)
-#define BC_CURRENT_MAX_CHARGE_MOL_mA (170000u)
+#define BC_CURRENT_MAX_CHARGE_MSL_mA (2150u)
+#define BC_CURRENT_MAX_CHARGE_RSL_mA (2100u)
+#define BC_CURRENT_MAX_CHARGE_MOL_mA (2100u)
 /**@}*/
 
 /**
@@ -210,14 +210,14 @@
  * @ptype   int
  * @unit    mAh
  */
-#define BC_CAPACITY_mAh (3500u)
+#define BC_CAPACITY_mAh (2150u)
 
 /**
  * @brief   Cell energy
  * @ptype   float
  * @unit    Wh
  */
-#define BC_ENERGY_Wh (10.0f)
+#define BC_ENERGY_Wh (7.84f)
 
 #if BC_VOLTAGE_MIN_MSL_mV < BC_VOLTAGE_DEEP_DISCHARGE_mV
 #error "Configuration error! - Maximum safety limit for under voltage can't be lower than deep-discharge limit"

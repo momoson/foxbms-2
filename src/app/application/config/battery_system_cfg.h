@@ -131,7 +131,7 @@ typedef enum {
 #define BS_NR_OF_PARALLEL_CELLS_PER_MODULE (1u)
 
 /** Value of the balancing resistors on the slave-board */
-#define BS_BALANCING_RESISTANCE_ohm (100.0)
+#define BS_BALANCING_RESISTANCE_ohm (65.0)
 
 /**
  * @def     BS_NR_OF_GPIOS_PER_MODULE
@@ -149,7 +149,7 @@ typedef enum {
  * @brief   number of temperature sensors per battery module
  * @ptype   int
  */
-#define BS_NR_OF_TEMP_SENSORS_PER_MODULE (8u)
+#define BS_NR_OF_TEMP_SENSORS_PER_MODULE (7u)
 
 #if BS_NR_OF_TEMP_SENSORS_PER_MODULE > BS_NR_OF_GPIOS_PER_MODULE
 #error "Number of temperature inputs cannot be higher than number of GPIOs"
@@ -199,7 +199,7 @@ typedef enum {
  *          above this value. The fuse should trigger to interrupt current
  *          flows above this value.
  */
-#define BS_MAIN_CONTACTORS_MAXIMUM_BREAK_CURRENT_mA (500000)
+#define BS_MAIN_CONTACTORS_MAXIMUM_BREAK_CURRENT_mA (10000)
 
 /**
  * @brief   Maximum fuse trigger duration
