@@ -57,6 +57,7 @@ from waflib.Configure import conf
 from waflib.TaskGen import taskgen_method
 from waflib.Tools import c_preproc
 from waflib.Tools.ccroot import link_task
+from waflib.Node import Node
 
 import f_ti_arm_cgt_cc_options  # pylint: disable=unused-import
 import f_ti_arm_helper  # pylint: disable=unused-import
@@ -756,7 +757,7 @@ def tiprogram(bld, *k, **kw):
 
     # if a hex file should be generated, we need to append the config
     if "linker_script_hex" in kw:
-        kw["features"] += " hexgen"
+        kw["features"] += " hexgen hexgen2"
         bld.env.LINKER_SCRIPT_HEX = kw["linker_script_hex"].abspath()
         bld.add_manual_dependency(tgt_elf, kw["linker_script_hex"])
         # get the file hash assuming Unix-style line endings
@@ -873,6 +874,32 @@ class hexgen(Task.Task):  # pylint: disable-msg=invalid-name
         """additional information appended to the keyword"""
         return f"{self.inputs[0]} -> {self.outputs[0]}"
 
+class hexgen2(Task.Task):  # pylint: disable-msg=invalid-name
+    """Task create hex file from elf files"""
+
+    # output should be used for installation
+    inst_to = True
+
+    #: str: color in which the command line is displayed in the terminal
+    color = "YELLOW"
+
+    #: list of str: tasks after that hexgen task can be run
+    after = ["link_task"]
+
+
+    run_str = (
+        "${ARMHEX} -q ${HEXGEN2FLAGS} "
+        "${SRC[0].abspath()} -o ${TGT[0].abspath()}"
+    )
+
+    def keyword(self):  # pylint: disable=no-self-use
+        """displayed keyword when generating the hex file"""
+        return "Compiling"
+
+    def __str__(self):
+        """additional information appended to the keyword"""
+        return f"{self.inputs[0]} -> {self.outputs[0]}"
+
 
 @TaskGen.feature("hexgen")
 @TaskGen.after("apply_link")
@@ -889,6 +916,25 @@ def add_hexgen_task(self):
             self.link_task.outputs[0].change_ext(".hex.map"),
         ],
     )
+
+@TaskGen.feature("hexgen2")
+@TaskGen.after("apply_link")
+def add_hexgen2_task(self):
+    """creates a tasks to create a intel hex file from the linker output
+    (task :py:class:`f_ti_arm_cgt.hexgen2`)"""
+    if not hasattr(self, "link_task"):
+        return
+    target_name = self.link_task.outputs[0].name
+    target_name = target_name.rsplit('.',1)[0]+"-intel.hex"
+    self.hexgen2 = self.create_task(
+        "hexgen2",
+        src=self.link_task.outputs[0],
+        tgt=[
+            self.link_task.outputs[0].parent.find_or_declare(target_name)
+        ],
+    )
+    print(self.hexgen2.outputs)
+    self.install_task = self.add_install_files(install_to=True, install_from=self.hexgen2.outputs[:], chmod=None,task=self.hexgen2)
 
 
 class bingen(Task.Task):  # pylint: disable-msg=invalid-name

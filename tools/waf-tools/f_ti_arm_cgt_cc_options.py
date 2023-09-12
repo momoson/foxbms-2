@@ -92,12 +92,15 @@ def load_cc_options(conf):  # pylint: disable-msg=redefined-outer-name
     cflags_os = conf.env.cc_options["CFLAGS"]["operating_system"]
     linkflags = conf.env.cc_options["LINKFLAGS"]
     hexgenflags = conf.env.cc_options["HEXGENFLAGS"]
+    hexgen2flags = conf.env.cc_options["HEXGEN2FLAGS"]
     nmflags = conf.env.cc_options["NMFLAGS"]
 
     if linkflags:
         conf.env.append_unique("LINKFLAGS", linkflags)
     if hexgenflags:
         conf.env.append_unique("HEXGENFLAGS", hexgenflags)
+    if hexgen2flags:
+        conf.env.append_unique("HEXGEN2FLAGS", hexgen2flags)
     if nmflags:
         conf.env.append_unique("NMFLAGS", nmflags)
 

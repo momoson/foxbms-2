@@ -107,6 +107,11 @@ HEXGENFLAGS:
   - --load_image:output_symbols=true
   - --load_image:section_addresses=false
 
+HEXGEN2FLAGS:
+  - --emit_warnings_as_errors
+  - --memwidth=8
+  - --intel
+
 NMFLAGS:
   - --all
   - -f
