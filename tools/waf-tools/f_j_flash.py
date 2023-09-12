@@ -198,11 +198,11 @@ class inst(Task.Task):  # pylint: disable=invalid-name
             return 0
         if not self.generator.bld.env.JFLASH:
             self.generator.bld.fatal("No debugger configured in the flash tool.")
-        elf_file = list(filter(lambda x: x.suffix() == ".elf", self.inputs))[0]
+        hex_file = list(filter(lambda x: x.name.endswith("-intel.hex"), self.inputs))[0]
         cmd = [
             Utils.subst_vars("${JFLASH}", self.generator.bld.env),
             "-openprjtools/debugger/ozone/foxbms.jflash",
-            f"-open{elf_file}",
+            f"-open{hex_file}",
             "-auto",
             "-startapp",
             "-exit",

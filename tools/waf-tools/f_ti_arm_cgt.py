@@ -535,10 +535,6 @@ class cprogram(link_task):  # pylint: disable-msg=invalid-name,too-few-public-me
     #: list of str: extensions that trigger a re-build
     ext_out = [".elf"]
 
-    # set inst_to to a dummy value so that waf knows that it can execute
-    # an installation task
-    inst_to = True
-
     def exec_command(self, cmd, **kw):  # pylint: disable=arguments-differ
         kw["shell"] = isinstance(cmd, str)
         kw["cwd"] = self.get_cwd()
